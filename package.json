@@ -1,0 +1,26 @@
+{
+  "name": "@devs-studio/validator",
+  "version": "1.0.3",
+  "description": "Validaciones para NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://JeanPaper@bitbucket.org/JeanPaper/devsstudio-validator.git"
+  },
+  "keywords": [
+    "validation",
+    "validators"
+  ],
+  "author": "Devs Studio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/JeanPaper/devsstudio-validator/issues"
+  },
+  "homepage": "https://bitbucket.org/JeanPaper/devsstudio-validator#readme",
+  "dependencies": {
+    "validator": "^13.7.0"
+  }
+}
