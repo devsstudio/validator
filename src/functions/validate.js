@@ -25,7 +25,12 @@ exports.validate = async (body, config) => {
                 if (!has_value) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("notNull", attribute, options.msg)
+                    _getMessage(
+                      "notNull",
+                      attribute,
+                      options.msg,
+                      options.locale
+                    )
                   );
                 }
                 break;
@@ -33,7 +38,12 @@ exports.validate = async (body, config) => {
                 if (has_value && !validator.isEmail(value)) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("isEmail", attribute, options.msg)
+                    _getMessage(
+                      "isEmail",
+                      attribute,
+                      options.msg,
+                      options.locale
+                    )
                   );
                 }
                 break;
@@ -41,7 +51,7 @@ exports.validate = async (body, config) => {
                 if (has_value && !validator.isURL(value)) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("isURL", attribute, options.msg)
+                    _getMessage("isURL", attribute, options.msg, options.locale)
                   );
                 }
                 break;
@@ -49,7 +59,7 @@ exports.validate = async (body, config) => {
                 if (has_value && !options.args.test(value)) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("is", attribute, options.msg)
+                    _getMessage("is", attribute, options.msg, options.locale)
                   );
                 }
                 break;
@@ -57,7 +67,7 @@ exports.validate = async (body, config) => {
                 if (has_value && !validator.isIn(value, options.args)) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("isIn", attribute, options.msg)
+                    _getMessage("isIn", attribute, options.msg, options.locale)
                   );
                 }
                 break;
@@ -65,7 +75,7 @@ exports.validate = async (body, config) => {
                 if (has_value && validator.isIn(value, options.args)) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("notIn", attribute, options.msg)
+                    _getMessage("notIn", attribute, options.msg, options.locale)
                   );
                 }
                 break;
@@ -79,7 +89,7 @@ exports.validate = async (body, config) => {
                 ) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("len", attribute, options.msg)
+                    _getMessage("len", attribute, options.msg, options.locale)
                   );
                 }
                 break;
@@ -87,7 +97,7 @@ exports.validate = async (body, config) => {
                 if (has_value && !options.args.test(value)) {
                   throw new DevsStudioValidationError(
                     400,
-                    _getMessage("is", attribute, options.msg)
+                    _getMessage("is", attribute, options.msg, options.locale)
                   );
                 }
                 break;
@@ -112,23 +122,27 @@ exports.validate = async (body, config) => {
   }
 };
 
-const _getMessage = (rule, attribute, msg) => {
+exports.getMessage = (rule, attribute, locale) => {
+  return _getMessage(rule, attribute, null, locale);
+};
+
+const _getMessage = (rule, attribute, msg, locale) => {
+  if (!locale) {
+    locale = "es";
+  }
+
+  const { getMessage } = require("../lang/" + locale);
+
   switch (rule) {
     case "notNull":
-      return msg ? msg : attribute + " es requerido";
     case "isEmail":
-      return msg ? msg : attribute + " no es un correo válido";
     case "isURL":
-      return msg ? msg : attribute + " no es una URL válida";
     case "len":
-      return msg ? msg : attribute + " no cumple con la longitud permitida";
     case "is":
-      return msg ? msg : attribute + " no cumple con el formato permitido";
     case "isIn":
-      return msg ? msg : attribute + " no está entre los valores permitidos";
     case "notIn":
-      return msg ? msg : attribute + " está entre los valores prohibidos";
+      return msg ? msg : getMessage(rule, attribute);
     default:
-      return "Hay errores en " + attribute;
+      return getMessage(rule, attribute);
   }
 };

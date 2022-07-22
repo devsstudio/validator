@@ -1,10 +1,12 @@
 {
   "name": "@devs-studio/validator",
-  "version": "1.0.3",
-  "description": "Validaciones para NodeJS",
-  "main": "index.js",
+  "version": "1.0.4",
+  "description": "Validaciones para javascript y typescript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "npx tsc",
+    "build": "npx tsc"
   },
   "repository": {
     "type": "git",
@@ -12,7 +14,10 @@
   },
   "keywords": [
     "validation",
-    "validators"
+    "validators",
+    "javascript",
+    "typescript",
+    "node"
   ],
   "author": "Devs Studio",
   "license": "ISC",
@@ -22,5 +27,8 @@
   "homepage": "https://bitbucket.org/JeanPaper/devsstudio-validator#readme",
   "dependencies": {
     "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
   }
 }
