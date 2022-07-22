@@ -1,6 +1,6 @@
 {
   "name": "@devs-studio/validator",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "Validaciones para javascript y typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

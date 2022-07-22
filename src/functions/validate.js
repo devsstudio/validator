@@ -131,7 +131,18 @@ const _getMessage = (rule, attribute, msg, locale) => {
     locale = "es";
   }
 
-  const { getMessage } = require("../lang/" + locale);
+  var xGetMessage = null;
+  switch (locale) {
+    case "en":
+      const { getMessage: getMessageEn } = require("../lang/en");
+      xGetMessage = getMessageEn;
+      break;
+    case "es":
+    default:
+      const { getMessage: getMessageEs } = require("../lang/es");
+      xGetMessage = getMessageEs;
+      break;
+  }
 
   switch (rule) {
     case "notNull":
@@ -141,8 +152,8 @@ const _getMessage = (rule, attribute, msg, locale) => {
     case "is":
     case "isIn":
     case "notIn":
-      return msg ? msg : getMessage(rule, attribute);
+      return msg ? msg : xGetMessage(rule, attribute);
     default:
-      return getMessage(rule, attribute);
+      return xGetMessage(rule, attribute);
   }
 };
