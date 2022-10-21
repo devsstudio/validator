@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://JeanPaper@bitbucket.org/JeanPaper/devsstudio-validator.git"
+    "url": "https://JeanPaper@bitbucket.org/JeanPaper/devsstudio-validator.git"
   },
   "keywords": [
     "validation",
